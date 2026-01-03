@@ -214,8 +214,6 @@ class Engine{
     private:
         CHAR_INFO *Primaryscreen;
         CHAR_INFO *Secondaryscreen;
-        int32_t secScreenWidth;
-        int32_t secScreenHeight;
         int32_t primaryScreenWidth;
         int32_t primaryScreenHeight;
         int primaryCells;
@@ -228,6 +226,8 @@ class Engine{
 
 
     public:
+        int32_t secScreenWidth;
+        int32_t secScreenHeight;
         HANDLE hconsolebuffer[2];
         int32_t frameTime;
         bool keepBorder = true;
@@ -580,7 +580,7 @@ class Engine{
                 update(elapsedTime.count());
                 render();
 
-                Sleep(1000/(float)refreshRate);
+                Sleep(1/(float)elapsedTime.count());
             }
         }
 
