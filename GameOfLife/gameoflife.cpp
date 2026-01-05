@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 class 
-Dummy: public Engine{
+GameOfLife: public Engine{
 
     public:
 
@@ -12,15 +12,49 @@ Dummy: public Engine{
         uint32_t cells, active = 0;
         bool *board[2]; bool alive = 1, dead = 0;
         float density = 0.25f; // Percentage alive
-        float timeSetter = 0.0f, steptime = 1/(float)6.5; // 5 generations per second
+        float timeSetter = 0.0f, steptime = 1/(float)20; // 5 generations per second
         int boardW;
         int boardH;
+        CHAR_INFO *infoScreen;
 
 
-        ~Dummy(){
+        ~GameOfLife(){
             delete[] board[0];
             delete[] board[1];
         }
+
+        void AddGosperGliderGun(int startX, int startY)
+        {
+            const int boardW = secScreenWidth / 2;
+            const int boardH = secScreenHeight;
+
+            // Relative positions of live cells in Gosper Glider Gun
+            static const int gun[][2] = {
+            {24,0},
+            {22,1},{24,1},
+            {12,2},{13,2},{20,2},{21,2},{34,2},{35,2},
+            {11,3},{15,3},{20,3},{21,3},{34,3},{35,3},
+            {0,4},{1,4},{10,4},{16,4},{20,4},{21,4},
+            {0,5},{1,5},{10,5},{14,5},{16,5},{17,5},{22,5},{24,5},
+            {10,6},{16,6},{24,6},
+            {11,7},{15,7},
+            {12,8},{13,8}
+            };
+
+            const int gunSize = sizeof(gun) / sizeof(gun[0]);
+
+            for (int i = 0; i < gunSize; i++)
+            {
+                int x = startX + gun[i][0];
+                int y = startY + gun[i][1];
+
+                if (x < 0 || x >= boardW || y < 0 || y >= boardH)
+                    continue;
+
+                board[active][y * boardW + x] = alive;
+            }
+        }
+
 
         bool Drawboard(){
             for(int y = 0; y < boardH; y++){
@@ -83,10 +117,11 @@ Dummy: public Engine{
             std::memset(board[0], dead, cells * sizeof(bool)); // writes every cells false or dead
             std::memset(board[1], dead, cells * sizeof(bool)); // writes every cells false or dead
 
-            // // load initial state
-            for(int i = 0; i < cells; i++) {
-                board[0][i] = (rand()/(float)RAND_MAX) < density; // every cell has a chance of begin alive which is equivalent to density
-            }
+            // // // load initial state
+            // for(int i = 0; i < cells; i++) {
+            //     board[0][i] = (rand()/(float)RAND_MAX) < density; // every cell has a chance of begin alive which is equivalent to density
+            // }
+            AddGosperGliderGun(10,10);
 
             return true;
         }
@@ -115,7 +150,7 @@ Dummy: public Engine{
 int
 WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
-    Dummy game;
+    GameOfLife game;
     game.refreshRate = 60;
     game.keepBorder = 1;
     game.run(8,16,140,40);
