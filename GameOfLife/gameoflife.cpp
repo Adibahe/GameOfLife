@@ -357,7 +357,7 @@ int WINAPI WinMain(
         else if(!wcscmp(argv[i], L"-w")){if(!(_wtoi(argv[++i]) % 2)) W = _wtoi(argv[i]);} 
         else if(!wcscmp(argv[i], L"-h")) H = _wtoi(argv[++i]);
         else if(!wcscmp(argv[i], L"-borders") || !wcscmp(argv[i], L"-b")) game.keepBorder = 1;
-        else if(!wcscmp(argv[i], L"-genRate") || !wcscmp(argv[i], L"-gr")) game.steptime = _wtof(argv[++i]);
+        else if(!wcscmp(argv[i], L"-genRate") || !wcscmp(argv[i], L"-gr")) game.steptime = 1/_wtof(argv[++i]);
         else if(!wcscmp(argv[i], L"-wrap") || !wcscmp(argv[i], L"-w")) game.wrap = 1;
         else if (!wcscmp(argv[i], L"-draw") || !wcscmp(argv[i], L"-d")) { if (!seedRequested) game.selectionGoingOn = 1; game.anySeedChoosen = 1;}
         else if (!wcscmp(argv[i], L"-seed"))
