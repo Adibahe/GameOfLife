@@ -42,10 +42,4 @@ The project includes a PowerShell build script.
 
 The console framework used in this project is maintained separately
 
-This simulator was built to explore:
-
-- Cellular automata
-- Low-level console rendering
-- Interactive terminal applications
-- Clean C++ architecture without external libraries
 
