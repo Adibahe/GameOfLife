@@ -218,8 +218,8 @@ GameOfLife: public Engine{
 
             srand(time(0)); // for generating varying random number each time this programm
 
-            tile = LoadSpriteFromFile("C:/Users/DELL/Documents/repos/GameOfLife/GameOfLife/tile.txt");
-            selecter = LoadSpriteFromFile("C:/Users/DELL/Documents/repos/GameOfLife/GameOfLife/selecter.txt");
+            tile = LoadSpriteFromFile("C:/Users/DELL/Documents/repos/GameOfLife/src/tile.txt");
+            selecter = LoadSpriteFromFile("C:/Users/DELL/Documents/repos/GameOfLife/src/selecter.txt");
             
 
             std::memset(board[0], dead, cells * sizeof(bool)); // writes every cells false or dead

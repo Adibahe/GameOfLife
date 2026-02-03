@@ -28,7 +28,7 @@ The project includes a PowerShell build script.
 1. Open PowerShell in the project directory  
 2. Run:
    ```powershell
-   ./run.ps1
+   ./run.ps1 mwindows
 3. This will create a gameoflife.exe* file.
 4. run it with given options. Use -help to understand options.
     ```powershell
