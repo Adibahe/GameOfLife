@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 
 # Paths
 $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$SourceDir   = Join-Path $ProjectRoot "GameOfLife"
+$SourceDir   = Join-Path $ProjectRoot "src"
 $BuildDir    = Join-Path $ProjectRoot "builds"
 
 # Helper: usage

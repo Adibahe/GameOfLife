@@ -218,8 +218,8 @@ GameOfLife: public Engine{
 
             srand(time(0)); // for generating varying random number each time this programm
 
-            tile = LoadSpriteFromFile("C:/Users/DELL/Documents/repos/consoleGame/GameOfLife/tile.txt");
-            selecter = LoadSpriteFromFile("C:/Users/DELL/Documents/repos/consoleGame/GameOfLife/selecter.txt");
+            tile = LoadSpriteFromFile("C:/Users/DELL/Documents/repos/GameOfLife/GameOfLife/tile.txt");
+            selecter = LoadSpriteFromFile("C:/Users/DELL/Documents/repos/GameOfLife/GameOfLife/selecter.txt");
             
 
             std::memset(board[0], dead, cells * sizeof(bool)); // writes every cells false or dead
@@ -333,6 +333,50 @@ int init(){
     return 0;
 }
 
+#include <windows.h>
+
+void show_help_box()
+{
+    const wchar_t* help =
+        L"=== Game of Life — Help ===\n\n"
+        L"Usage:\n"
+        L"  GameOfLife.exe [options]\n\n"
+
+        L"Options:\n"
+        L"  -w <number>    Set board width (must be even, default: 140)\n"
+        L"  -h <number>    Set board height (default: 40)\n"
+        L"  -gr <number>   Simulation speed (steps/sec, default: 10)\n"
+        L"  -fps <number>  Refresh rate\n"
+        L"  -help          Show this help\n\n"
+
+        L"Flags:\n"
+        L"  -wrap          Enable wrap-around edges\n"
+        L"  -borders, -b   Keep borders visible\n\n"
+
+        L"Initial state / seed:\n"
+        L"  -draw, -d      Interactive seed drawing\n"
+        L"  -seed <type>   Preset seed:\n"
+        L"     regular   Regular pattern\n"
+        L"     rpent     R-pentomino\n"
+        L"     acorn     Acorn\n"
+        L"     pulsar   Pulsar oscillator\n"
+        L"     breeder  Breeder\n"
+        L"     gosper   Gosper glider gun\n"
+        L"     lwss     Lightweight spaceship\n"
+        L"     mwss     Middleweight spaceship\n\n"
+
+        L"Controls:\n"
+        L"  W A S D   Move selector\n"
+        L"  SPACE     Toggle cell\n"
+        L"  ENTER     Start simulation\n\n"
+
+        L"Example:\n"
+        L"  GameOfLife.exe -w 120 -h 50 -gr 15";
+
+        MessageBoxW(NULL,help,L"Game of Life",MB_OK | MB_ICONINFORMATION);
+}
+
+
 int WINAPI WinMain(
     HINSTANCE,
     HINSTANCE,
@@ -379,33 +423,7 @@ int WINAPI WinMain(
             game.anySeedChoosen = 1;
         }
         else if(!wcscmp(argv[i], L"-help")){
-            wprintf(L"=== Game of Life - Help ===\n\n");
-            wprintf(L"Usage: GameOfLife.exe [options]\n\n");
-            wprintf(L"Options:\n");
-            wprintf(L"  -w <number>    Set the board width (must be even, default: 140)\n");
-            wprintf(L"  -h <number>    Set the board height (default: 40)\n");
-            wprintf(L"  -gr <number>   Set the simulation speed in steps/sec (default: 10)\n");
-            wprintf(L"  -fps <number>  Set the refresh rate\n");
-            wprintf(L"  -help,         Display this help section\n\n");
-            wprintf(L"  -wrap              Enable wrap-around edges (toroidal board)\n");
-            wprintf(L"  -borders, -b       Keep borders visible\n\n");
-            wprintf(L"Initial state / seed selection:\n");
-            wprintf(L"  -draw, -d          Enable interactive seed drawing mode\n");
-            wprintf(L"  -seed <type>       Choose a preset seed:\n");
-            wprintf(L"                     regular  - Regular pattern\n");
-            wprintf(L"                     rpent    - R-pentomino\n");
-            wprintf(L"                     acorn    - Acorn pattern\n");
-            wprintf(L"                     pulsar   - Pulsar oscillator\n");
-            wprintf(L"                     breeder  - Breeder pattern\n");
-            wprintf(L"                     gosper   - Gosper glider gun\n");
-            wprintf(L"                     lwss     - Lightweight spaceship\n");
-            wprintf(L"                     mwss     - Middleweight spaceship\n\n");
-            wprintf(L"Controls during simulation:\n");
-            wprintf(L"  W / A / S / D  Move the selector cursor\n");
-            wprintf(L"  SPACE          Toggle the cell under selector\n");
-            wprintf(L"  ENTER          Finish selection and start simulation\n\n");
-            wprintf(L"Example:\n");
-            wprintf(L"  GameOfLife.exe -w 120 -h 50 -s 15\n");
+            show_help_box();
             return EXIT_SUCCESS;
         }
     }
